@@ -36,4 +36,8 @@ export const ButtonsContainer = styled.div<ButtonsProps>`
     ($controls && $controls !== "on-hover" && !$showOnHover)
       ? "1"
       : "0"};
+
+  & button {
+    z-index: 4;
+  }
 `;

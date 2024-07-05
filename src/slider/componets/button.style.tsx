@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { ButtonProps } from "../types/simple-slider-style.types";
 
 export const Button = styled.button<ButtonProps>`
-  z-index: 4;
   display: flex;
   justify-content: center;
   align-items: center;
