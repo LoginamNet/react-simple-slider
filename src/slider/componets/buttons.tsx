@@ -4,7 +4,7 @@ import SimpleButton from "./button";
 
 import { ButtonsContainer } from "./buttons.style";
 
-import { SliderButtons } from "../simple-slider.types";
+import { SliderButtons } from "../types/simple-slider.types";
 
 export default function Buttons(props: SliderButtons) {
   const {
@@ -37,14 +37,17 @@ export default function Buttons(props: SliderButtons) {
 
   return (
     <ButtonsContainer
-      controls={controls}
-      slidingDirection={slidingDirection}
-      showOnHover={controlsOptions?.showOnHover}
-      position={controlsOptions?.position}
-      alinging={controlsOptions?.alinging}
-      hovered={hovered}
+      $controls={controls}
+      $slidingDirection={slidingDirection}
+      $showOnHover={controlsOptions?.showOnHover}
+      $position={controlsOptions?.position}
+      $alinging={controlsOptions?.alinging}
+      $hovered={hovered}
       style={{
-        gap: controlsOptions?.gap ? `${controlsOptions.gap}px` : "20px",
+        gap:
+          controlsOptions?.gap || controlsOptions?.gap === 0
+            ? `${controlsOptions.gap}px`
+            : "20px",
       }}
     >
       {customPrevButtonFN ? (

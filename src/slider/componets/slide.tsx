@@ -8,7 +8,7 @@ import {
 import handleTransitionDuration from "../controls/transition-duration";
 import handleTransitionTimingFunction from "../controls/transition-timing-function";
 
-import { Slide } from "../simple-slider.types";
+import { Slide } from "../types/simple-slider.types";
 
 import { SlideContainer } from "./slide.style";
 
@@ -26,18 +26,18 @@ export default function SimpleSlide(props: Slide) {
 
   return (
     <SlideContainer
-      index={index}
-      sliding={sliding}
-      controls={sliderParams.controls}
-      type={sliderParams.type}
-      slidesIndexes={slidesIndexes}
-      isUnderlaid={isNextSlideUnderlaid(
+      $index={index}
+      $sliding={sliding}
+      $controls={sliderParams.controls}
+      $type={sliderParams.type}
+      $slidesIndexes={slidesIndexes}
+      $isUnderlaid={isNextSlideUnderlaid(
         children,
         sliderParams.controls,
         sliderParams.type,
         slidesIndexes
       )}
-      notInfinite={sliderParams.controlsOptions?.notInfinite}
+      $notInfinite={sliderParams.controlsOptions?.notInfinite}
       key={index}
       style={{
         transform:

@@ -9,9 +9,10 @@ type Slider = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    butonMargin?: number;
+    butonMargin?: string | number;
     arrowColor?: "white" | "black" | string;
   };
+  startWithSlide?: number;
   slidingType?: "sequence" | "underlay" | "overlay";
   slidingDirection?: "left" | "top" | "right" | "bottom";
   slidingDuration?: number;
@@ -47,7 +48,7 @@ type Slide = {
       gap?: number;
       buttonShape?: "square" | "circle" | "transparent";
       buttonSize?: "small" | "medium" | "big" | number;
-      butonMargin?: number;
+      butonMargin?: string | number;
       arrowColor?: "white" | "black" | string;
     };
     direction: "top" | "bottom" | "right" | "left";
@@ -74,7 +75,7 @@ type SliderButtons = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    butonMargin?: number;
+    butonMargin?: string | number;
     arrowColor?: "white" | "black" | string;
   };
   hovered: boolean;

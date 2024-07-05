@@ -3,15 +3,16 @@ import React, { useCallback, useEffect, useState } from "react";
 import SimpleSlide from "./componets/slide";
 import Buttons from "./componets/buttons";
 
-import { Slider } from "./simple-slider.types";
+import { Slider } from "./types/simple-slider.types";
 
-import { SliderContainer, SliderBody } from "./simple-slider.styles";
+import { SliderContainer, SliderBody } from "./simple-slider.style";
 
 export default function SimpleSlider(props: Slider) {
   const {
     children,
     controls,
     controlsOptions,
+    startWithSlide,
     slidingType,
     slidingDirection,
     slidingDuration,
@@ -38,7 +39,13 @@ export default function SimpleSlider(props: Slider) {
   const [sliding, setSliding] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [controlledByHover, setControlledByHover] = useState(false);
-  const [slidesIndexes, setSlidesIndexes] = useState({ current: 0, next: 0 });
+  const [slidesIndexes, setSlidesIndexes] = useState(
+    startWithSlide &&
+      startWithSlide > 0 &&
+      startWithSlide <= React.Children.count(children)
+      ? { current: startWithSlide - 1, next: startWithSlide - 1 }
+      : { current: 0, next: 0 }
+  );
 
   const updateSliderParams = useCallback(() => {
     setSliderParams({

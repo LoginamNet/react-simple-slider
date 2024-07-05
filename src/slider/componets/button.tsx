@@ -1,8 +1,8 @@
 import React from "react";
 
-import { Button } from "./button.styles";
+import { Button } from "./button.style";
 
-import { SliderButton } from "../simple-slider.types";
+import { SliderButton } from "../types/simple-slider.types";
 
 export default function SimpleButton(props: SliderButton) {
   const {
@@ -16,12 +16,12 @@ export default function SimpleButton(props: SliderButton) {
 
   return (
     <Button
-      directition={directition}
-      sliding={sliding}
-      slidingDirection={slidingDirection}
-      buttonShape={controlsOptions?.buttonShape}
-      buttonSize={controlsOptions?.buttonSize}
-      stopedAtEdgeSlide={stopedAtEdgeSlide}
+      $directition={directition}
+      $sliding={sliding}
+      $slidingDirection={slidingDirection}
+      $buttonShape={controlsOptions?.buttonShape}
+      $buttonSize={controlsOptions?.buttonSize}
+      $stopedAtEdgeSlide={stopedAtEdgeSlide}
       style={{
         width: `${
           typeof controlsOptions?.buttonSize === "number"
@@ -31,7 +31,7 @@ export default function SimpleButton(props: SliderButton) {
         margin:
           typeof controlsOptions?.butonMargin === "number"
             ? `${controlsOptions?.butonMargin}px`
-            : typeof controlsOptions?.butonMargin === "number"
+            : typeof controlsOptions?.butonMargin === "string"
             ? `${controlsOptions?.butonMargin}`
             : "30px",
       }}
