@@ -19,8 +19,6 @@
     A <strong>Simple Slider</strong> on React with multiple scrolling modes and the ability to add custom buttons.
   </p>
 
----
-
 ## Usage
 
 ### Instalation
@@ -83,13 +81,11 @@ Simple Slider accepts ReactNode as "children" — this is a type that includes e
 
 ### Width, Height and Background
 
-The slider occupies 100% of the width and height of the parent element in width and height, and each slide occupies 100% of the size of the slider itself. Resize the parent container to resize the slider.
+A Simple Slider occupies 100% of the width and height of the parent element, and each "child" component is wrapped in a Slide that occupies 100% of the size of the slider itself. Resize the parent container to resize the slider. At the same time, your "child" component may have a different size from the Slide, which can sometimes be useful.
 
 In the example above, each slide will have a size of 600x400px.
 
 Both the slider and the slides have a transparent background. Add styles to the parent element and to each created slide, respectively (for example, to create a preloader).
-
----
 
 ## Props
 
@@ -106,8 +102,6 @@ Both the slider and the slides have a transparent background. Add styles to the 
 | `stopOnHover?`           | boolean         | true, false                                                                         | false     | topping auto sliding with hover on slider (not relevant when the "controls" option is set to "on-hover")                   |
 | `customPrevButtonFN?`    | function        | `(prevSlide: () => void, sliding?: boolean, atFirstSlide?: boolean) => JSX.Element` |           | a function for rendering a custom button to move to the previous slide (explanations and an example below)                 |
 | `customNextButtonFN?`    | function        | `(nextSlide: () => void, sliding?: boolean, atLastSlide?: boolean) => JSX.Element`  |           | a function for rendering a custom button to move to the next slide (explanations and an example below)                     |
-
----
 
 ## Licence
 
