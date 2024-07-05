@@ -1,6 +1,6 @@
 {
   "name": "@loginamnet/react-simple-slider",
-  "version": "0.9.19",
+  "version": "1.0.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -14,9 +14,12 @@
   "license": "MIT",
   "keywords": [
     "simple",
+    "slider",
     "react",
+    "react-component",
+    "react-slider",
     "typescript",
-    "slider"
+    "responsive"
   ],
   "description": "A simple slider on React with multiple scrolling modes and the ability to add custom buttons",
   "repository": {
