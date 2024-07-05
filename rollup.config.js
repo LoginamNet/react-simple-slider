@@ -1,3 +1,4 @@
+import del from "rollup-plugin-delete";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
@@ -25,6 +26,7 @@ export default [
     ],
     external: ["react", "react-dom", "styled-components"],
     plugins: [
+      del({ targets: "dist/*" }),
       external(),
       resolve(),
       commonjs(),
