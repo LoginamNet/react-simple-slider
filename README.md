@@ -18,6 +18,15 @@
   <p>
     A <strong>Simple Slider</strong> on React with multiple scrolling modes and the ability to add custom buttons.
   </p>
+  
+## Features
+
+- Several directions of movement and types of slide changes :last_quarter_moon:
+- Responsive design :computer:
+- Easy to add custom rendered slides :pushpin:
+- The ability to add your own control buttons :arrow_forward:
+- Dependency free :seedling:
+- Lightweight :balloon:
 
 ## Usage
 
@@ -105,7 +114,7 @@ Both the Simple Slider and the Slide have a transparent background. Add styles t
 
 **Controls Options**
 
-controlsOptions will be applied only if the "controls" option is enabled. If they are not specified, the buttons will have a standard design and position inside the slider.
+controlsOptions will be applied only if the **controls** option is enabled. If they are not specified, the buttons will have a standard design and position inside the slider.
 
 | Prop           | Type           | Values                            | Default   | Description                                                                                                                    |
 | -------------- | -------------- | --------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
@@ -136,19 +145,20 @@ export default function MySliderComponent() {
       }}
     >
       <SimpleSlider
-      	  controls="on-hover"
-          controlsOptions={{
-          	notInfinite: true,
-            position: "center",
-            alinging: "end",
-            gap: 100,
-            buttonShape: "transparent",
-            buttonSize: "big",
-            arrowColor: "blue",
-            butonMargin: "0 30px",
-          }}>
+        controls="on-hover"
+        controlsOptions={{
+          notInfinite: true,
+          position: "center",
+          alinging: "end",
+          gap: 100,
+          buttonShape: "transparent",
+          buttonSize: "big",
+          arrowColor: "blue",
+          butonMargin: "0 30px",
+        }}
+      >
         <MySlide1 text="First Slide" />
-        <MySlide2>Second Slide</MySlide3>
+        <MySlide2>Second Slide</MySlide2>
       </SimpleSlider>
     </div>
   );
@@ -230,17 +240,48 @@ export default function MySliderComponent() {
       }}
     >
       <SimpleSlider
-      	  controls="on-hover"
-          customPrevButtonFN={CustomPrevButton}
-          customNextButtonFN={CustomNextButton}
-	  >
+        controls="on-hover"
+        customPrevButtonFN={CustomPrevButton}
+        customNextButtonFN={CustomNextButton}
+      >
         <MySlide1 text="First Slide" />
-        <MySlide2>Second Slide</MySlide3>
+        <MySlide2>Second Slide</MySlide2>
       </SimpleSlider>
     </div>
   );
 }
 ```
+
+## Special Case
+
+During normal operation of the slider outside the slide change cycle, only the current slide remains visible - even if the size of the component itself is smaller than the size of the slider.
+
+However, with certain settings, it is possible to overlay one slide on top of another to create a complete picture.
+
+To achieve this effect, you need to set **controls** to **true** (not **on-hover**), the **notInfinite** property in the **controlsOptions** object is set to **true** and **slidingType** is set **overlay** (this value is set by default).
+
+```javascript
+controls
+controlsOptions={{
+    notInfinite: true,
+}}
+```
+
+If it is necessary that the slides be removed from the already laid out stack - set the option **startWithSlide** equal to the number of slides (you may have to change **slidingDirection** option to the opposite too).
+
+```javascript
+controls
+controlsOptions={{
+    notInfinite: true,
+}}
+{/* in this example, it is assumed that we have added five slides */}
+startWithSlide={5}
+```
+
+## Plans
+
+- Create a demo page to demonstrate the capabilities of the slider
+- Add a "dots" component that can be placed outside the slider
 
 ## Licence
 
