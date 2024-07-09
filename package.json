@@ -1,6 +1,6 @@
 {
   "name": "@loginamnet/simple-slider",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "private": false,
   "publishConfig": {
     "access": "public"
