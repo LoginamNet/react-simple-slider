@@ -28,6 +28,7 @@ export const Button = styled.button<ButtonProps>`
       : $slidingDirection === "left"
       ? "rotate(180deg)"
       : ""};
+  pointer-events: ${({ $stopedAtEdgeSlide }) => $stopedAtEdgeSlide && "none"};
 
   &:hover {
     background-color: ${({ $buttonShape }) =>

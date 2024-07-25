@@ -33,7 +33,7 @@
 **Instalation**
 
 ```bash
-$ npm i @loginamnet/simple-slider
+npm i @loginamnet/simple-slider
 ```
 
 **Import**
