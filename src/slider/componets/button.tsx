@@ -29,10 +29,10 @@ export default function SimpleButton(props: SliderButton) {
             : ""
         }`,
         margin:
-          typeof controlsOptions?.butonMargin === "number"
-            ? `${controlsOptions?.butonMargin}px`
-            : typeof controlsOptions?.butonMargin === "string"
-            ? `${controlsOptions?.butonMargin}`
+          typeof controlsOptions?.buttonMargin === "number"
+            ? `${controlsOptions?.buttonMargin}px`
+            : typeof controlsOptions?.buttonMargin === "string"
+            ? `${controlsOptions?.buttonMargin}`
             : "30px",
       }}
       onClick={() => changeSlideFN()}
