@@ -122,11 +122,11 @@ controlsOptions will be applied only if the **controls** option is enabled. If t
 | `showOnHover?`  | boolean        | true, false                       | false     | displays buttons only when hovering over the slider                                                                            |
 | `position?`     | string         | "edge", "start", "center", "end"; | "edge"    | defines the position of the buttons parallel to the axis of motion (at the edges, at the beginning, at the end, in the center) |
 | `alinging?`     | string         | "start", "center", "end";         | "center"  | defines the position of the buttons perpendicular to the axis of motion (at the beginning, at the end, in the center)          |
-| `gap?`          | number         | number                            | 20        | the distance between the buttons in pixels                                                                                     |
+| `gap?`          | number         | number                            | 20        | the distance between the button (px)                                                                                           |
 | `buttonShape?`  | string         | "square", "circle", "transparent" | "square"  | the shape of the standard slider buttons                                                                                       |
 | `buttonSize?`   | string, number | "small", "medium", "big", number  | "medium"  | the size of the standard slider buttons (px)                                                                                   |
 | `buttonMargin?` | string, number | string                            | 30        | the margin of the standard slider buttons (px). using a string, you can achieve different values vertically and horizontally   |
-| `arrowColor?`   | string         | string                            | "#000000" | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function) of the standard slider buttons arrows     |
+| `arrowColor?`   | string         | string                            | "#000000" | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color) of the standard slider buttons arrows                          |
 
 **Controls Options Example**
 
@@ -153,8 +153,8 @@ export default function MySliderComponent() {
           gap: 100,
           buttonShape: "transparent",
           buttonSize: "big",
-          arrowColor: "blue",
           buttonMargin: "0 30px",
+          arrowColor: "blue",
         }}
       >
         <MySlide1 text="First Slide" />
