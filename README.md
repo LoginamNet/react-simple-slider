@@ -102,11 +102,11 @@ Both the Simple Slider and the Slide have a transparent background. Add styles t
 | ------------------------ | --------------- | ------------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------- |
 | `controls`               | boolean, string | true, false , "on-hover"              | false     | direct control of the slider using the buttons without automatic scrolling or with a stop at hover                         |
 | `controlsOptions?`       | object          | **explanations and an example below** | {}        | various options for setting slider controls when the "controls" option is enabled                                          |
-| `startWithSlide?`        | number          | number                                | 1         | the number of the slide to start scrolling from                                                                            |
+| `startWithSlide?`        | number          | number (MIN: 1)                       | 1         | the number of the slide to start scrolling from                                                                            |
 | `slidingType?`           | string          | "sequence", "underlay", "overlay"     | "overlay" | the type of slide offset relative to each other                                                                            |
 | `slidingDirection?`      | string          | "left", "top", "right", "bottom"      | "left"    | the direction of movement of the slides                                                                                    |
-| `slidingDuration?`       | number          | number                                | 2000      | the time of one slide movement cycle (ms)                                                                                  |
-| `slidingDelay?`          | number          | number                                | 1000      | delay before the start of the next slide movement for auto sliding or the "controls" option with the value "on-hover" (ms) |
+| `slidingDuration?`       | number          | number (MIN: 1)                       | 2000      | the time of one slide movement cycle (ms)                                                                                  |
+| `slidingDelay?`          | number          | number (MIN: 50)                      | 1000      | delay before the start of the next slide movement for auto sliding or the "controls" option with the value "on-hover" (ms) |
 | `slidingTimingFunction?` | string          | string                                | "ease"    | [transition-timing-function](https://developer.mozilla.org/en-US/docs/Web/CSS/transition-timing-function)                  |
 | `stopOnHover?`           | boolean         | true, false                           | false     | stopping auto sliding with hover on slider (not relevant when the "controls" option is set to "on-hover")                  |
 | `customPrevButtonFN?`    | function        | **explanations and an example below** |           | a function for rendering a custom button to move to the previous slide                                                     |
@@ -116,17 +116,17 @@ Both the Simple Slider and the Slide have a transparent background. Add styles t
 
 controlsOptions will be applied only if the **controls** option is enabled. If they are not specified, the buttons will have a standard design and position inside the slider.
 
-| Prop            | Type           | Values                            | Default   | Description                                                                                                                    |
-| --------------- | -------------- | --------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `notInfinite?`  | boolean        | true, false                       | false     | disables endless sliding and stops on the first and last slides                                                                |
-| `showOnHover?`  | boolean        | true, false                       | false     | displays buttons only when hovering over the slider                                                                            |
-| `position?`     | string         | "edge", "start", "center", "end"; | "edge"    | defines the position of the buttons parallel to the axis of motion (at the edges, at the beginning, at the end, in the center) |
-| `alinging?`     | string         | "start", "center", "end";         | "center"  | defines the position of the buttons perpendicular to the axis of motion (at the beginning, at the end, in the center)          |
-| `gap?`          | number         | number                            | 20        | the distance between the button (px)                                                                                           |
-| `buttonShape?`  | string         | "square", "circle", "transparent" | "square"  | the shape of the standard slider buttons                                                                                       |
-| `buttonSize?`   | string, number | "small", "medium", "big", number  | "medium"  | the size of the standard slider buttons (px)                                                                                   |
-| `buttonMargin?` | string, number | string                            | 30        | the margin of the standard slider buttons (px). using a string, you can achieve different values vertically and horizontally   |
-| `arrowColor?`   | string         | string                            | "#000000" | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color) of the standard slider buttons arrows                          |
+| Prop            | Type           | Values                                    | Default   | Description                                                                                                                    |
+| --------------- | -------------- | ----------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `notInfinite?`  | boolean        | true, false                               | false     | disables endless sliding and stops on the first and last slides                                                                |
+| `showOnHover?`  | boolean        | true, false                               | false     | displays buttons only when hovering over the slider                                                                            |
+| `position?`     | string         | "edge", "start", "center", "end";         | "edge"    | defines the position of the buttons parallel to the axis of motion (at the edges, at the beginning, at the end, in the center) |
+| `alinging?`     | string         | "start", "center", "end";                 | "center"  | defines the position of the buttons perpendicular to the axis of motion (at the beginning, at the end, in the center)          |
+| `gap?`          | number         | number (MIN: 0)                           | 20        | the distance between the button (px)                                                                                           |
+| `buttonShape?`  | string         | "square", "circle", "transparent"         | "square"  | the shape of the standard slider buttons                                                                                       |
+| `buttonSize?`   | string, number | "small", "medium", "big", number (MIN: 1) | "medium"  | the size of the standard slider buttons (px)                                                                                   |
+| `buttonMargin?` | string, number | string, number (MIN: 0)                   | 30        | the margin of the standard slider buttons (px). using a string, you can achieve different values vertically and horizontally   |
+| `arrowColor?`   | string         | string                                    | "#000000" | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color) of the standard slider buttons arrows                          |
 
 **Controls Options Example**
 

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { ButtonProps } from "../types/simple-slider-style.types";
 
 export const Button = styled.button<ButtonProps>`
+  z-index: 4;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,13 +31,6 @@ export const Button = styled.button<ButtonProps>`
       : ""};
   pointer-events: ${({ $stopedAtEdgeSlide }) => $stopedAtEdgeSlide && "none"};
 
-  &:hover {
-    background-color: ${({ $buttonShape }) =>
-      $buttonShape === "transparent"
-        ? "transparent"
-        : "rgba(172, 172, 172, 0.536)"};
-  }
-
   & > svg {
     padding: ${({ $buttonShape }) =>
       $buttonShape === "circle" ? "25%" : "15%"};
@@ -44,5 +38,14 @@ export const Button = styled.button<ButtonProps>`
       $directition === "previous"
         ? "translateX(-5%)"
         : "rotate(180deg) translateX(-5%)"};
+  }
+
+  @media (pointer: fine) {
+    &:hover {
+      background-color: ${({ $buttonShape }) =>
+        $buttonShape === "transparent"
+          ? "transparent"
+          : "rgba(172, 172, 172, 0.536)"};
+    }
   }
 `;

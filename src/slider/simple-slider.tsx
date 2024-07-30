@@ -39,12 +39,20 @@ export default function SimpleSlider(props: Slider) {
   const [sliding, setSliding] = useState(false);
   const [hovered, setHovered] = useState(false);
   const [controlledByHover, setControlledByHover] = useState(false);
-  const [slidesIndexes, setSlidesIndexes] = useState(
+  const [slidesIndexes, setSlidesIndexes] = useState<{
+    current: number;
+    next: number;
+    nextBtnPressed?: boolean;
+  }>(
     startWithSlide &&
       startWithSlide > 0 &&
       startWithSlide <= React.Children.count(children)
-      ? { current: startWithSlide - 1, next: startWithSlide - 1 }
-      : { current: 0, next: 0 }
+      ? {
+          current: startWithSlide - 1,
+          next: startWithSlide - 1,
+          nextBtnPressed: undefined,
+        }
+      : { current: 0, next: 0, nextBtnPressed: undefined }
   );
 
   const updateSliderParams = useCallback(() => {
@@ -81,6 +89,7 @@ export default function SimpleSlider(props: Slider) {
     setSlidesIndexes({
       current: slidesIndexes.next,
       next: slidesIndexes.next,
+      nextBtnPressed: undefined,
     });
   };
 
@@ -95,6 +104,7 @@ export default function SimpleSlider(props: Slider) {
           slidesIndexes.current > 0
             ? slidesIndexes.current - 1
             : React.Children.count(children) - 1,
+        nextBtnPressed: false,
       });
   };
 
@@ -110,6 +120,7 @@ export default function SimpleSlider(props: Slider) {
           slidesIndexes.current < React.Children.count(children) - 1
             ? slidesIndexes.current + 1
             : 0,
+        nextBtnPressed: true,
       });
   };
 
@@ -129,6 +140,7 @@ export default function SimpleSlider(props: Slider) {
             slidesIndexes.current < React.Children.count(children) - 1
               ? slidesIndexes.current + 1
               : 0,
+          nextBtnPressed: true,
         });
       }, sliderParams.delay);
 

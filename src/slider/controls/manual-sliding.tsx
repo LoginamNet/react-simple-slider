@@ -6,9 +6,35 @@ const hanldeHorizontalTranformation = (
   slidesIndexes: {
     current: number;
     next: number;
+    nextBtnPressed?: boolean;
   }
 ) => {
-  if (slidesIndexes.current < slidesIndexes.next) {
+  if (
+    React.Children.count(children) === 2 ||
+    slidesIndexes.current > slidesIndexes.next
+  ) {
+    return slidesIndexes.nextBtnPressed
+      ? {
+          nextSlideDirection:
+            slidingDirection === "right"
+              ? "translateX(-100%)"
+              : "translateX(100%)",
+          currentSlideDirection:
+            slidingDirection === "right"
+              ? "translateX(100%)"
+              : "translateX(-100%)",
+        }
+      : {
+          nextSlideDirection:
+            slidingDirection === "right"
+              ? "translateX(100%)"
+              : "translateX(-100%)",
+          currentSlideDirection:
+            slidingDirection === "right"
+              ? "translateX(-100%)"
+              : "translateX(100%)",
+        };
+  } else {
     return slidesIndexes.current === 0 &&
       slidesIndexes.next === React.Children.count(children) - 1
       ? {
@@ -31,23 +57,6 @@ const hanldeHorizontalTranformation = (
               ? "translateX(100%)"
               : "translateX(-100%)",
         };
-  } else if (
-    slidesIndexes.current === React.Children.count(children) - 1 &&
-    slidesIndexes.next === 0
-  ) {
-    return {
-      nextSlideDirection:
-        slidingDirection === "right" ? "translateX(-100%)" : "translateX(100%)",
-      currentSlideDirection:
-        slidingDirection === "right" ? "translateX(100%)" : "translateX(-100%)",
-    };
-  } else {
-    return {
-      nextSlideDirection:
-        slidingDirection === "right" ? "translateX(100%)" : "translateX(-100%)",
-      currentSlideDirection:
-        slidingDirection === "right" ? "translateX(-100%)" : "translateX(100%)",
-    };
   }
 };
 
@@ -57,9 +66,35 @@ const hanldeVerticalTransformation = (
   slidesIndexes: {
     current: number;
     next: number;
+    nextBtnPressed?: boolean;
   }
 ) => {
-  if (slidesIndexes.current < slidesIndexes.next) {
+  if (
+    React.Children.count(children) === 2 ||
+    slidesIndexes.current > slidesIndexes.next
+  ) {
+    return slidesIndexes.nextBtnPressed
+      ? {
+          nextSlideDirection:
+            slidingDirection === "top"
+              ? "translateY(-100%)"
+              : "translateY(100%)",
+          currentSlideDirection:
+            slidingDirection === "top"
+              ? "translateY(100%)"
+              : "translateY(-100%)",
+        }
+      : {
+          nextSlideDirection:
+            slidingDirection === "top"
+              ? "translateY(100%)"
+              : "translateY(-100%)",
+          currentSlideDirection:
+            slidingDirection === "top"
+              ? "translateY(-100%)"
+              : "translateY(100%)",
+        };
+  } else {
     return slidesIndexes.current === 0 &&
       slidesIndexes.next === React.Children.count(children) - 1
       ? {
@@ -82,23 +117,6 @@ const hanldeVerticalTransformation = (
               ? "translateY(100%)"
               : "translateY(-100%)",
         };
-  } else if (
-    slidesIndexes.current === React.Children.count(children) - 1 &&
-    slidesIndexes.next === 0
-  ) {
-    return {
-      nextSlideDirection:
-        slidingDirection === "top" ? "translateY(-100%)" : "translateY(100%)",
-      currentSlideDirection:
-        slidingDirection === "top" ? "translateY(100%)" : "translateY(-100%)",
-    };
-  } else {
-    return {
-      nextSlideDirection:
-        slidingDirection === "top" ? "translateY(100%)" : "translateY(-100%)",
-      currentSlideDirection:
-        slidingDirection === "top" ? "translateY(-100%)" : "translateY(100%)",
-    };
   }
 };
 
@@ -122,7 +140,9 @@ const isSlidingBack = (
     next: number;
   }
 ) => {
-  if (
+  if (React.Children.count(children) === 2) {
+    return false;
+  } else if (
     slidesIndexes.current > slidesIndexes.next &&
     !(
       slidesIndexes.current === React.Children.count(children) - 1 &&

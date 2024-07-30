@@ -9,7 +9,7 @@ type Slider = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    buttonMargin?: string | number;
+    butonMargin?: string | number;
     arrowColor?: "white" | "black" | string;
   };
   startWithSlide?: number;
@@ -37,6 +37,7 @@ type Slide = {
   slidesIndexes: {
     current: number;
     next: number;
+    nextBtnPressed?: boolean;
   };
   sliderParams: {
     controls: boolean | "on-hover";
@@ -48,7 +49,7 @@ type Slide = {
       gap?: number;
       buttonShape?: "square" | "circle" | "transparent";
       buttonSize?: "small" | "medium" | "big" | number;
-      buttonMargin?: string | number;
+      butonMargin?: string | number;
       arrowColor?: "white" | "black" | string;
     };
     direction: "top" | "bottom" | "right" | "left";
@@ -75,7 +76,7 @@ type SliderButtons = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    buttonMargin?: string | number;
+    butonMargin?: string | number;
     arrowColor?: "white" | "black" | string;
   };
   hovered: boolean;
@@ -107,7 +108,7 @@ type SliderButton = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    buttonMargin?: number | string;
+    butonMargin?: number | string;
     arrowColor?: "white" | "black" | string;
   };
   stopedAtEdgeSlide: boolean;
