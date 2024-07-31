@@ -4,6 +4,7 @@ type ButtonProps = {
   $slidingDirection: "left" | "top" | "right" | "bottom";
   $buttonShape?: "square" | "circle" | "transparent";
   $buttonSize?: "small" | "medium" | "big" | number;
+  $buttonMargin?: string | number;
   $stopedAtEdgeSlide: boolean;
 };
 
@@ -13,20 +14,26 @@ type ButtonsProps = {
   $showOnHover?: true;
   $position?: "edge" | "start" | "center" | "end";
   $alinging?: "start" | "center" | "end";
+  $gap?: number;
   $hovered: boolean;
 };
 
 type SlideProps = {
   $index: number;
   $sliding: boolean;
-  $controls: boolean | "on-hover";
-  $type: string;
   $slidesIndexes: {
     current: number;
     next: number;
   };
-  $isUnderlaid: boolean;
+  $controls: boolean | "on-hover";
   $notInfinite?: true;
+  $type: string;
+  $controlledByHover: boolean;
+  $isUnderlaid: boolean;
+  $handleControledTransformation: string | undefined;
+  $handleUncontroledTransformation: string;
+  $handleTransitionDuration: string;
+  $handleTransitionTimingFunction: string;
 };
 
 export type { ButtonProps, ButtonsProps, SlideProps };

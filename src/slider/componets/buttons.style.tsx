@@ -28,6 +28,7 @@ export const ButtonsContainer = styled.div<ButtonsProps>`
       : $alinging === "end"
       ? "flex-end"
       : "center"};
+  gap: ${({ $gap }) => ($gap || $gap === 0 ? `${$gap}px` : "20px")};
   width: inherit;
   height: inherit;
   opacity: ${({ $controls, $showOnHover, $hovered }) =>
@@ -36,8 +37,4 @@ export const ButtonsContainer = styled.div<ButtonsProps>`
     ($controls && $controls !== "on-hover" && !$showOnHover)
       ? "1"
       : "0"};
-
-  & button {
-    z-index: 4;
-  }
 `;

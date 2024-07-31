@@ -9,7 +9,19 @@ export const Button = styled.button<ButtonProps>`
   align-items: center;
   aspect-ratio: 1 / 1;
   width: ${({ $buttonSize }) =>
-    $buttonSize === "big" ? "80px" : $buttonSize === "small" ? "40px" : "60px"};
+    typeof $buttonSize === "number"
+      ? `${$buttonSize}px`
+      : $buttonSize === "big"
+      ? "80px"
+      : $buttonSize === "small"
+      ? "40px"
+      : "60px"};
+  margin: ${({ $buttonMargin }) =>
+    typeof $buttonMargin === "number"
+      ? `${$buttonMargin}px`
+      : typeof $buttonMargin === "string"
+      ? `${$buttonMargin}`
+      : "30px"};
   background-color: ${({ $buttonShape }) =>
     $buttonShape === "transparent"
       ? "transparent"

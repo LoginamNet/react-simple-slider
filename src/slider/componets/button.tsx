@@ -21,21 +21,13 @@ export default function SimpleButton(props: SliderButton) {
       $slidingDirection={slidingDirection}
       $buttonShape={controlsOptions?.buttonShape}
       $buttonSize={controlsOptions?.buttonSize}
+      $buttonMargin={controlsOptions?.buttonMargin}
       $stopedAtEdgeSlide={stopedAtEdgeSlide}
-      style={{
-        width: `${
-          typeof controlsOptions?.buttonSize === "number"
-            ? `${controlsOptions?.buttonSize}px`
-            : ""
-        }`,
-        margin:
-          typeof controlsOptions?.buttonMargin === "number"
-            ? `${controlsOptions?.buttonMargin}px`
-            : typeof controlsOptions?.buttonMargin === "string"
-            ? `${controlsOptions?.buttonMargin}`
-            : "30px",
+      onClick={(event) => {
+        event.stopPropagation();
+
+        changeSlideFN();
       }}
-      onClick={() => changeSlideFN()}
     >
       <svg
         fill={

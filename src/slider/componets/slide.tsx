@@ -28,49 +28,47 @@ export default function SimpleSlide(props: Slide) {
     <SlideContainer
       $index={index}
       $sliding={sliding}
-      $controls={sliderParams.controls}
-      $type={sliderParams.type}
       $slidesIndexes={slidesIndexes}
+      $controls={sliderParams.controls}
+      $notInfinite={sliderParams.controlsOptions?.notInfinite}
+      $type={sliderParams.type}
+      $controlledByHover={controlledByHover}
       $isUnderlaid={isNextSlideUnderlaid(
         children,
         sliderParams.controls,
         sliderParams.type,
         slidesIndexes
       )}
-      $notInfinite={sliderParams.controlsOptions?.notInfinite}
+      $handleControledTransformation={handleControledTransformation(
+        children,
+        index,
+        sliding,
+        sliderParams.type,
+        sliderParams.direction,
+        slidesIndexes
+      )}
+      $handleUncontroledTransformation={handleUncontroledTransformation(
+        index,
+        sliding,
+        sliderParams.type,
+        sliderParams.direction,
+        slidesIndexes
+      )}
+      $handleTransitionDuration={handleTransitionDuration(
+        index,
+        sliding,
+        sliderParams.duration,
+        slidesIndexes
+      )}
+      $handleTransitionTimingFunction={handleTransitionTimingFunction(
+        index,
+        sliderParams.timingFunction,
+        slidesIndexes
+      )}
       key={index}
-      style={{
-        transform:
-          (sliderParams.controls && sliderParams.controls !== "on-hover") ||
-          (sliderParams.controls === "on-hover" && controlledByHover)
-            ? handleControledTransformation(
-                children,
-                index,
-                sliding,
-                sliderParams.type,
-                sliderParams.direction,
-                slidesIndexes
-              )
-            : handleUncontroledTransformation(
-                index,
-                sliding,
-                sliderParams.type,
-                sliderParams.direction,
-                slidesIndexes
-              ),
-        transitionDuration: handleTransitionDuration(
-          index,
-          sliding,
-          sliderParams.duration,
-          slidesIndexes
-        ),
-        transitionTimingFunction: handleTransitionTimingFunction(
-          index,
-          sliderParams.timingFunction,
-          slidesIndexes
-        ),
-      }}
-      onTransitionEnd={() => {
+      onTransitionEnd={(event) => {
+        event.stopPropagation();
+
         !(
           index === slidesIndexes.current && sliderParams.type === "sequence"
         ) && restoreIndexes();

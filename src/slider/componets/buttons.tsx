@@ -42,13 +42,8 @@ export default function Buttons(props: SliderButtons) {
       $showOnHover={controlsOptions?.showOnHover}
       $position={controlsOptions?.position}
       $alinging={controlsOptions?.alinging}
+      $gap={controlsOptions?.gap}
       $hovered={hovered}
-      style={{
-        gap:
-          controlsOptions?.gap || controlsOptions?.gap === 0
-            ? `${controlsOptions.gap}px`
-            : "20px",
-      }}
     >
       {customPrevButtonFN ? (
         customPrevButtonEL()
