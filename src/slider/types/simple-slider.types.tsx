@@ -9,7 +9,7 @@ type Slider = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    butonMargin?: string | number;
+    buttonMargin?: string | number;
     arrowColor?: "white" | "black" | string;
   };
   startWithSlide?: number;
@@ -49,7 +49,7 @@ type Slide = {
       gap?: number;
       buttonShape?: "square" | "circle" | "transparent";
       buttonSize?: "small" | "medium" | "big" | number;
-      butonMargin?: string | number;
+      buttonMargin?: string | number;
       arrowColor?: "white" | "black" | string;
     };
     direction: "top" | "bottom" | "right" | "left";
@@ -76,7 +76,7 @@ type SliderButtons = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    butonMargin?: string | number;
+    buttonMargin?: string | number;
     arrowColor?: "white" | "black" | string;
   };
   hovered: boolean;
@@ -108,7 +108,7 @@ type SliderButton = {
     gap?: number;
     buttonShape?: "square" | "circle" | "transparent";
     buttonSize?: "small" | "medium" | "big" | number;
-    butonMargin?: number | string;
+    buttonMargin?: number | string;
     arrowColor?: "white" | "black" | string;
   };
   stopedAtEdgeSlide: boolean;
