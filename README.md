@@ -15,10 +15,16 @@
   </a>
 </p>
 
-  <p>
-    A <strong>Simple Slider</strong> on React with multiple scrolling modes and the ability to add custom buttons.
-  </p>
-  
+<p>
+  A <strong>Simple Slider</strong> on React with multiple scrolling modes and the ability to add custom buttons.
+</p>
+
+## Demonstration
+
+![FSimple Slider Demo GIF](slider-demo.gif)
+
+A friendly [DEMO](https://simple-slider-demo.netlify.app/), where you can try all kinds of settings and copy the resulting code!
+
 ## Features
 
 - Several directions of movement and types of slide changes :last_quarter_moon:
@@ -255,6 +261,50 @@ export default function MySliderComponent() {
   );
 }
 ```
+
+## Preloader
+
+The slider and its elements use a client-side rendering, which, when there are a large number of slides, may cause them to appear briefly on the screen before they are fully loaded. If you are not using a global preloader, you should consider adding this element directly to the container where the slider is located.
+
+Note that for the slider and preloader container, the **overflow** property should be set to **"hidden"**. The preloader itself should occupy 100% of the width and height of the container.
+
+Once all the elements have loaded inside the container, remove the preloader. For React, the simplest way is to use a combination of **useState** and **useEffect**.
+
+```javascript
+import { useEffect, useState } from "react";
+
+import SimpleSlider from "@loginamnet/simple-slider";
+
+import Preloader from "./components";
+import MySlide1 from "./components";
+import MySlide2 from "./components";
+
+export default function MySliderComponent() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+  }, []);
+
+  return (
+    <div
+      style={{
+        width: "600px",
+        height: "400px",
+        overflow: "hidden",
+      }}
+    >
+      {loading && <Preloader />}
+      <SimpleSlider>
+        <MySlide1 text="First Slide" />
+        <MySlide2>Second Slide</MySlide2>
+      </SimpleSlider>
+    </div>
+  );
+}
+```
+
+There are many different ideas for the styling of the preloader available online, so it has been decided not to include this element directly within the slider in order to allow for greater creative freedom.
 
 ## Special Case
 
