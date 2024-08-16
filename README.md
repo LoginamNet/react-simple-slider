@@ -36,7 +36,7 @@
 
 ## Demonstration
 
-![FSimple Slider Demo GIF](public/slider-demo.gif)
+![FSimple Slider Demo GIF](slider-demo.gif)
 
 A friendly [DEMO](https://simple-slider-demo.netlify.app/), where you can try all kinds of settings and copy the resulting code!
 
@@ -115,8 +115,7 @@ A Simple Slider occupies 100% of the width and height of the parent element, and
 
 In the example above, each slide will have a size of 600x400px.
 
-> [!TIP]
-> Both the Simple Slider and the slide wrapper have a transparent background. Add styles to the parent element and to each created "child" component, respectively (for example, to create a preloader).
+> **TIP**: Both the Simple Slider and the slide wrapper have a transparent background. Add styles to the parent element and to each created "child" component, respectively (for example, to create a preloader).
 
 ## Props<a id='props'></a>
 
@@ -354,8 +353,7 @@ export default function CustomNextButton(
 }
 ```
 
-> [!IMPORTANT]
-> For the correct behavior of the slider, **it is important to use the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) tag!** But its contents and styles depend entirely on your imagination.
+> **IMPORTANT**: For the correct behavior of the slider, **it is important to use the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) tag!** But its contents and styles depend entirely on your imagination.
 
 The **sliding** property determines the behavior of the button during the slide movement cycle.
 
@@ -400,8 +398,7 @@ You can replace the standard slider dots with custom ones!
 
 To do this, you need to create a custom component of the dot in a special way and transfer it to the slider as a function.
 
-> [!NOTE]
-> If you use custom dot, **dotShape**, **dotSize**, **dotColor** and **activeDotColor** properties will not be applied. The styling will depend on the styles within your component and your creativity.
+> **NOTE**: If you use custom dot, **dotShape**, **dotSize**, **dotColor** and **activeDotColor** properties will not be applied. The styling will depend on the styles within your component and your creativity.
 
 **Custom Dot Component**
 
@@ -433,8 +430,7 @@ export default function CustomDot(
 }
 ```
 
-> [!IMPORTANT]
-> For the correct behavior of the slider, **it is important to use the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) tag!** But its contents and styles depend entirely on your imagination.
+> **IMPORTANT**: For the correct behavior of the slider, **it is important to use the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) tag!** But its contents and styles depend entirely on your imagination.
 
 The **nextSlideIndex** property defines the index of the next slide and in combination with **index** property can be useful for stabilizing the state of active and inactive dot (you can see the example above).
 
@@ -474,8 +470,7 @@ export default function MySliderComponent() {
 
 The slider and its elements use a client-side rendering, which, when there are a large number of slides, may cause them to appear briefly on the screen before they are fully loaded. If you are not using a global preloader, you should consider adding this element directly to the container where the slider is located.
 
-> [!IMPORTANT]
-> For the slider and preloader container, the **overflow** property should be set to **"hidden"**. The preloader itself should occupy 100% of the width and height of the container.
+> **IMPORTANT**: For the slider and preloader container, the **overflow** property should be set to **"hidden"**. The preloader itself should occupy 100% of the width and height of the container.
 
 Once all the elements have loaded inside the container, remove the preloader. For React, the simplest way is to use a combination of **useState** and **useEffect**.
 
