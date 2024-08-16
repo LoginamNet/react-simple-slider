@@ -1,3 +1,33 @@
+type SlideProps = {
+  $index: number;
+  $sliding: boolean;
+  $slidesIndexes: {
+    current: number;
+    next: number;
+    nextBtnPressed?: boolean | "dot";
+  };
+  $controls: boolean | "manual";
+  $notInfinite?: true;
+  $type: string;
+  $controlledByHover: boolean;
+  $isUnderlaid: boolean;
+  $handleControledTransformation: string | undefined;
+  $handleUncontroledTransformation: string | undefined;
+  $handleTransitionDuration: string;
+  $handleTransitionTimingFunction: string;
+};
+
+type ButtonsProps = {
+  $controls: boolean | "manual";
+  $slidingDirection: "left" | "top" | "right" | "bottom";
+  $showOnHover?: true;
+  $position?: "edge" | "start" | "center" | "end";
+  $alinging?: "start" | "center" | "end";
+  $reverse?: true;
+  $gap?: number;
+  $hovered: boolean;
+};
+
 type ButtonProps = {
   $directition: "previous" | "next";
   $sliding: boolean;
@@ -5,35 +35,41 @@ type ButtonProps = {
   $buttonShape?: "square" | "circle" | "transparent";
   $buttonSize?: "small" | "medium" | "big" | number;
   $buttonMargin?: string | number;
+  $reverse?: true;
   $stopedAtEdgeSlide: boolean;
 };
 
-type ButtonsProps = {
-  $controls: boolean | "on-hover";
-  $slidingDirection: "left" | "top" | "right" | "bottom";
-  $showOnHover?: true;
+type DotsContainerProps = {
   $position?: "edge" | "start" | "center" | "end";
   $alinging?: "start" | "center" | "end";
+};
+
+type DotsBlockProps = {
+  $dots: boolean;
+  $showOnHover?: true;
+  $direction?: "horizontal" | "vertical";
+  $reverse?: true;
   $gap?: number;
+  $margin?: string | number;
   $hovered: boolean;
 };
 
-type SlideProps = {
+type DotProps = {
   $index: number;
+  $nextSlideIndex: number;
   $sliding: boolean;
-  $slidesIndexes: {
-    current: number;
-    next: number;
-  };
-  $controls: boolean | "on-hover";
-  $notInfinite?: true;
-  $type: string;
-  $controlledByHover: boolean;
-  $isUnderlaid: boolean;
-  $handleControledTransformation: string | undefined;
-  $handleUncontroledTransformation: string;
-  $handleTransitionDuration: string;
-  $handleTransitionTimingFunction: string;
+  $slidingDuration: number;
+  $dotShape?: "square" | "circle";
+  $dotSize?: "small" | "medium" | "big" | number;
+  $dotColor?: "white" | "black" | string;
+  $activeDotColor?: string;
 };
 
-export type { ButtonProps, ButtonsProps, SlideProps };
+export type {
+  ButtonProps,
+  ButtonsProps,
+  SlideProps,
+  DotsContainerProps,
+  DotsBlockProps,
+  DotProps,
+};

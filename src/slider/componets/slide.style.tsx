@@ -14,24 +14,22 @@ export const SlideContainer = styled.div<SlideProps>`
   position: absolute;
   height: 100%;
   width: 100%;
-  opacity: ${({ $index, $controls, $type, $notInfinite, $slidesIndexes }) =>
-    ($controls &&
-      $controls !== "on-hover" &&
-      $type === "overlay" &&
-      $notInfinite &&
-      $index <= $slidesIndexes.current) ||
+  opacity: ${({ $index, $type, $notInfinite, $slidesIndexes }) =>
+    ($type === "overlay" && $notInfinite && $index <= $slidesIndexes.current) ||
     $index === $slidesIndexes.current ||
     $index === $slidesIndexes.next
       ? "1"
       : "0"};
   transform: ${({
+    $slidesIndexes,
     $controls,
     $controlledByHover,
     $handleControledTransformation,
     $handleUncontroledTransformation,
   }) =>
-    ($controls && $controls !== "on-hover") ||
-    ($controls === "on-hover" && $controlledByHover)
+    ($controls && $controls === "manual") ||
+    $controlledByHover ||
+    $slidesIndexes.nextBtnPressed !== undefined
       ? $handleControledTransformation
       : $handleUncontroledTransformation};
   transition-duration: ${({ $handleTransitionDuration }) =>

@@ -42,6 +42,7 @@ export default function Buttons(props: SliderButtons) {
       $showOnHover={controlsOptions?.showOnHover}
       $position={controlsOptions?.position}
       $alinging={controlsOptions?.alinging}
+      $reverse={controlsOptions?.reverse}
       $gap={controlsOptions?.gap}
       $hovered={hovered}
     >

@@ -45,8 +45,12 @@ export const Button = styled.button<ButtonProps>`
   & > svg {
     padding: ${({ $buttonShape }) =>
       $buttonShape === "circle" ? "25%" : "15%"};
-    transform: ${({ $directition }) =>
+    transform: ${({ $directition, $reverse }) =>
       $directition === "previous"
+        ? $reverse
+          ? "rotate(180deg) translateX(-5%)"
+          : "translateX(-5%)"
+        : $reverse
         ? "translateX(-5%)"
         : "rotate(180deg) translateX(-5%)"};
   }

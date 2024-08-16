@@ -22,6 +22,7 @@ export default function SimpleButton(props: SliderButton) {
       $buttonShape={controlsOptions?.buttonShape}
       $buttonSize={controlsOptions?.buttonSize}
       $buttonMargin={controlsOptions?.buttonMargin}
+      $reverse={controlsOptions?.reverse}
       $stopedAtEdgeSlide={stopedAtEdgeSlide}
       onClick={(event) => {
         event.stopPropagation();

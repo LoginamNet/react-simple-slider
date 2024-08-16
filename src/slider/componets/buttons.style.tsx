@@ -6,12 +6,20 @@ export const ButtonsContainer = styled.div<ButtonsProps>`
   position: absolute;
   top: 0;
   display: flex;
-  flex-direction: ${({ $slidingDirection }) =>
+  flex-direction: ${({ $slidingDirection, $reverse }) =>
     $slidingDirection === "top"
-      ? "column"
+      ? $reverse
+        ? "column-reverse"
+        : "column"
       : $slidingDirection === "bottom"
-      ? "column-reverse"
+      ? $reverse
+        ? "column"
+        : "column-reverse"
       : $slidingDirection === "left"
+      ? $reverse
+        ? "row"
+        : "row-reverse"
+      : $reverse
       ? "row-reverse"
       : "row"};
   justify-content: ${({ $position }) =>
@@ -32,9 +40,7 @@ export const ButtonsContainer = styled.div<ButtonsProps>`
   width: inherit;
   height: inherit;
   opacity: ${({ $controls, $showOnHover, $hovered }) =>
-    ($controls && $showOnHover && $hovered) ||
-    ($controls === "on-hover" && $hovered) ||
-    ($controls && $controls !== "on-hover" && !$showOnHover)
+    ($controls && !$showOnHover) || ($controls && $showOnHover && $hovered)
       ? "1"
       : "0"};
 

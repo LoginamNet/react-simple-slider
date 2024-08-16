@@ -1,3 +1,5 @@
+import React from "react";
+
 const handleTransformationDirection = (currentSlidingDirection: string) => {
   switch (currentSlidingDirection) {
     case "right":
@@ -31,6 +33,7 @@ const handleUncontroledTransformation = (
   slidesIndexes: {
     current: number;
     next: number;
+    nextBtnPressed?: boolean | "dot";
   }
 ) => {
   if (index === slidesIndexes.current) {

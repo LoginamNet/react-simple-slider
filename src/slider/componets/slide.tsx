@@ -1,16 +1,14 @@
 import React from "react";
 
+import { isNextSlideUnderlaid } from "../controls/postition-checks";
+import handleControledTransformation from "../controls/manual-sliding";
 import handleUncontroledTransformation from "../controls/auto-sliding";
-import {
-  handleControledTransformation,
-  isNextSlideUnderlaid,
-} from "../controls/manual-sliding";
 import handleTransitionDuration from "../controls/transition-duration";
 import handleTransitionTimingFunction from "../controls/transition-timing-function";
 
-import { Slide } from "../types/simple-slider.types";
-
 import { SlideContainer } from "./slide.style";
+
+import { Slide } from "../types/simple-slider.types";
 
 export default function SimpleSlide(props: Slide) {
   const {

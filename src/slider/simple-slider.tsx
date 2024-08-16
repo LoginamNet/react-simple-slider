@@ -2,16 +2,19 @@ import React, { useCallback, useEffect, useState } from "react";
 
 import SimpleSlide from "./componets/slide";
 import Buttons from "./componets/buttons";
-
-import { Slider } from "./types/simple-slider.types";
+import Dots from "./componets/dots";
 
 import { SliderContainer, SliderBody } from "./simple-slider.style";
+
+import { Slider } from "./types/simple-slider.types";
 
 export default function SimpleSlider(props: Slider) {
   const {
     children,
     controls,
     controlsOptions,
+    dots,
+    dotsOptions,
     startWithSlide,
     slidingType,
     slidingDirection,
@@ -21,11 +24,14 @@ export default function SimpleSlider(props: Slider) {
     stopOnHover,
     customPrevButtonFN,
     customNextButtonFN,
+    customDotFN,
   } = props;
 
   const [sliderParams, setSliderParams] = useState({
     controls: controls ? controls : false,
     controlsOptions: controlsOptions,
+    dots: dots ? dots : false,
+    dotsOptions: dotsOptions,
     direction: slidingDirection ? slidingDirection : "left",
     type:
       slidingType === "sequence" || slidingType === "underlay"
@@ -42,7 +48,7 @@ export default function SimpleSlider(props: Slider) {
   const [slidesIndexes, setSlidesIndexes] = useState<{
     current: number;
     next: number;
-    nextBtnPressed?: boolean;
+    nextBtnPressed?: boolean | "dot";
   }>(
     startWithSlide &&
       startWithSlide > 0 &&
@@ -59,6 +65,8 @@ export default function SimpleSlider(props: Slider) {
     setSliderParams({
       controls: controls ? controls : false,
       controlsOptions: controlsOptions,
+      dots: dots ? dots : false,
+      dotsOptions: dotsOptions,
       direction: slidingDirection ? slidingDirection : "left",
       type:
         slidingType === "sequence" || slidingType === "underlay"
@@ -72,6 +80,8 @@ export default function SimpleSlider(props: Slider) {
   }, [
     controls,
     controlsOptions,
+    dots,
+    dotsOptions,
     slidingDelay,
     slidingDirection,
     slidingDuration,
@@ -124,13 +134,23 @@ export default function SimpleSlider(props: Slider) {
       });
   };
 
+  const switchToSelectedSlide = (selectedSlideIndex: number) => {
+    !sliding &&
+      slidesIndexes.current !== selectedSlideIndex &&
+      selectedSlideIndex >= 0 &&
+      selectedSlideIndex < React.Children.count(children) &&
+      setSlidesIndexes({
+        current: slidesIndexes.current,
+        next: selectedSlideIndex,
+        nextBtnPressed: "dot",
+      });
+  };
+
   // checking for manual control and hovered control and enabling auto-sliding according to the specified parameters
 
   useEffect(() => {
     if (
-      (!sliderParams.controls ||
-        (sliderParams.controls === "on-hover" && !controlledByHover)) &&
-      !hovered &&
+      !(sliderParams.controls === "manual" || controlledByHover) &&
       slidesIndexes.current === slidesIndexes.next
     ) {
       const timeoutId = setTimeout(() => {
@@ -171,30 +191,24 @@ export default function SimpleSlider(props: Slider) {
 
   useEffect(() => {
     if (!sliding) {
-      sliderParams.controls === "on-hover" && hovered
+      stopOnHover && hovered
         ? setControlledByHover(true)
         : setControlledByHover(false);
     }
-  }, [hovered, sliderParams.controls, sliding]);
+  }, [hovered, sliding, stopOnHover]);
 
   return (
     <SliderContainer
-      onMouseOver={() =>
-        ((!sliderParams.controls && stopOnHover) ||
-          (sliderParams.controls &&
-            sliderParams.controls !== "on-hover" &&
-            sliderParams.controlsOptions?.showOnHover) ||
-          sliderParams.controls === "on-hover") &&
-        setSliderHoverStatus(true)
-      }
-      onMouseOut={() =>
-        ((!sliderParams.controls && stopOnHover) ||
-          (sliderParams.controls &&
-            sliderParams.controls !== "on-hover" &&
-            sliderParams.controlsOptions?.showOnHover) ||
-          sliderParams.controls === "on-hover") &&
-        setSliderHoverStatus()
-      }
+      onMouseOver={(event) => {
+        event.stopPropagation();
+
+        setSliderHoverStatus(true);
+      }}
+      onMouseOut={(event) => {
+        event.stopPropagation();
+
+        setSliderHoverStatus();
+      }}
     >
       <SliderBody>
         {React.Children.map(children, (child, index) => (
@@ -211,6 +225,7 @@ export default function SimpleSlider(props: Slider) {
           </SimpleSlide>
         ))}
       </SliderBody>
+
       {sliderParams.controls && (
         <Buttons
           sliding={sliding}
@@ -230,6 +245,20 @@ export default function SimpleSlider(props: Slider) {
           nextSlide={nextSlide}
           customPrevButtonFN={customPrevButtonFN}
           customNextButtonFN={customNextButtonFN}
+        />
+      )}
+
+      {sliderParams.dots && (
+        <Dots
+          slidesAmount={React.Children.count(children)}
+          nextSlideIndex={slidesIndexes.next}
+          sliding={sliding}
+          slidingDuration={sliderParams.duration}
+          dots={sliderParams.dots}
+          dotsOptions={sliderParams.dotsOptions}
+          hovered={hovered}
+          switchToSelectedSlide={switchToSelectedSlide}
+          customDotFN={customDotFN}
         />
       )}
     </SliderContainer>

@@ -1,53 +1,57 @@
 import React from "react";
 
+import { isSlidingBack } from "./postition-checks";
+
 const hanldeHorizontalTranformation = (
   children: React.ReactNode,
   slidingDirection: string,
   slidesIndexes: {
     current: number;
     next: number;
-    nextBtnPressed?: boolean;
+    nextBtnPressed?: boolean | "dot";
   }
 ) => {
   if (
-    React.Children.count(children) === 2 ||
-    slidesIndexes.current > slidesIndexes.next
+    React.Children.count(children) === 2 &&
+    slidesIndexes.nextBtnPressed === true
   ) {
-    return slidesIndexes.nextBtnPressed
-      ? {
-          nextSlideDirection:
-            slidingDirection === "right"
-              ? "translateX(-100%)"
-              : "translateX(100%)",
-          currentSlideDirection:
-            slidingDirection === "right"
-              ? "translateX(100%)"
-              : "translateX(-100%)",
-        }
-      : {
-          nextSlideDirection:
-            slidingDirection === "right"
-              ? "translateX(100%)"
-              : "translateX(-100%)",
-          currentSlideDirection:
-            slidingDirection === "right"
-              ? "translateX(-100%)"
-              : "translateX(100%)",
-        };
+    return {
+      nextSlideDirection:
+        slidingDirection === "right" ? "translateX(-100%)" : "translateX(100%)",
+      currentSlideDirection:
+        slidingDirection === "right" ? "translateX(100%)" : "translateX(-100%)",
+    };
+  } else if (slidesIndexes.current > slidesIndexes.next) {
+    if (slidesIndexes.nextBtnPressed === true) {
+      return {
+        nextSlideDirection:
+          slidingDirection === "right"
+            ? "translateX(-100%)"
+            : "translateX(100%)",
+        currentSlideDirection:
+          slidingDirection === "right"
+            ? "translateX(100%)"
+            : "translateX(-100%)",
+      };
+    } else {
+      return {
+        nextSlideDirection:
+          slidingDirection === "right"
+            ? "translateX(100%)"
+            : "translateX(-100%)",
+        currentSlideDirection:
+          slidingDirection === "right"
+            ? "translateX(-100%)"
+            : "translateX(100%)",
+      };
+    }
   } else {
-    return slidesIndexes.current === 0 &&
+    if (
+      slidesIndexes.current === 0 &&
       slidesIndexes.next === React.Children.count(children) - 1
-      ? {
-          nextSlideDirection:
-            slidingDirection === "right"
-              ? "translateX(100%)"
-              : "translateX(-100%)",
-          currentSlideDirection:
-            slidingDirection === "right"
-              ? "translateX(-100%)"
-              : "translateX(100%)",
-        }
-      : {
+    ) {
+      if (slidesIndexes.nextBtnPressed === "dot") {
+        return {
           nextSlideDirection:
             slidingDirection === "right"
               ? "translateX(-100%)"
@@ -57,6 +61,30 @@ const hanldeHorizontalTranformation = (
               ? "translateX(100%)"
               : "translateX(-100%)",
         };
+      } else {
+        return {
+          nextSlideDirection:
+            slidingDirection === "right"
+              ? "translateX(100%)"
+              : "translateX(-100%)",
+          currentSlideDirection:
+            slidingDirection === "right"
+              ? "translateX(-100%)"
+              : "translateX(100%)",
+        };
+      }
+    } else {
+      return {
+        nextSlideDirection:
+          slidingDirection === "right"
+            ? "translateX(-100%)"
+            : "translateX(100%)",
+        currentSlideDirection:
+          slidingDirection === "right"
+            ? "translateX(100%)"
+            : "translateX(-100%)",
+      };
+    }
   }
 };
 
@@ -66,48 +94,42 @@ const hanldeVerticalTransformation = (
   slidesIndexes: {
     current: number;
     next: number;
-    nextBtnPressed?: boolean;
+    nextBtnPressed?: boolean | "dot";
   }
 ) => {
   if (
-    React.Children.count(children) === 2 ||
-    slidesIndexes.current > slidesIndexes.next
+    React.Children.count(children) === 2 &&
+    slidesIndexes.nextBtnPressed === true
   ) {
-    return slidesIndexes.nextBtnPressed
-      ? {
-          nextSlideDirection:
-            slidingDirection === "top"
-              ? "translateY(-100%)"
-              : "translateY(100%)",
-          currentSlideDirection:
-            slidingDirection === "top"
-              ? "translateY(100%)"
-              : "translateY(-100%)",
-        }
-      : {
-          nextSlideDirection:
-            slidingDirection === "top"
-              ? "translateY(100%)"
-              : "translateY(-100%)",
-          currentSlideDirection:
-            slidingDirection === "top"
-              ? "translateY(-100%)"
-              : "translateY(100%)",
-        };
+    return {
+      nextSlideDirection:
+        slidingDirection === "top" ? "translateY(-100%)" : "translateY(100%)",
+      currentSlideDirection:
+        slidingDirection === "top" ? "translateY(100%)" : "translateY(-100%)",
+    };
+  } else if (slidesIndexes.current > slidesIndexes.next) {
+    if (slidesIndexes.nextBtnPressed === true) {
+      return {
+        nextSlideDirection:
+          slidingDirection === "top" ? "translateY(-100%)" : "translateY(100%)",
+        currentSlideDirection:
+          slidingDirection === "top" ? "translateY(100%)" : "translateY(-100%)",
+      };
+    } else {
+      return {
+        nextSlideDirection:
+          slidingDirection === "top" ? "translateY(100%)" : "translateY(-100%)",
+        currentSlideDirection:
+          slidingDirection === "top" ? "translateY(-100%)" : "translateY(100%)",
+      };
+    }
   } else {
-    return slidesIndexes.current === 0 &&
+    if (
+      slidesIndexes.current === 0 &&
       slidesIndexes.next === React.Children.count(children) - 1
-      ? {
-          nextSlideDirection:
-            slidingDirection === "top"
-              ? "translateY(100%)"
-              : "translateY(-100%)",
-          currentSlideDirection:
-            slidingDirection === "top"
-              ? "translateY(-100%)"
-              : "translateY(100%)",
-        }
-      : {
+    ) {
+      if (slidesIndexes.nextBtnPressed === "dot") {
+        return {
           nextSlideDirection:
             slidingDirection === "top"
               ? "translateY(-100%)"
@@ -117,6 +139,26 @@ const hanldeVerticalTransformation = (
               ? "translateY(100%)"
               : "translateY(-100%)",
         };
+      } else {
+        return {
+          nextSlideDirection:
+            slidingDirection === "top"
+              ? "translateY(100%)"
+              : "translateY(-100%)",
+          currentSlideDirection:
+            slidingDirection === "top"
+              ? "translateY(-100%)"
+              : "translateY(100%)",
+        };
+      }
+    } else {
+      return {
+        nextSlideDirection:
+          slidingDirection === "top" ? "translateY(-100%)" : "translateY(100%)",
+        currentSlideDirection:
+          slidingDirection === "top" ? "translateY(100%)" : "translateY(-100%)",
+      };
+    }
   }
 };
 
@@ -126,61 +168,12 @@ const handleTransformationDirection = (
   slidesIndexes: {
     current: number;
     next: number;
+    nextBtnPressed?: boolean | "dot";
   }
 ) => {
   return slidingDirection === "top" || slidingDirection === "bottom"
     ? hanldeVerticalTransformation(children, slidingDirection, slidesIndexes)
     : hanldeHorizontalTranformation(children, slidingDirection, slidesIndexes);
-};
-
-const isSlidingBack = (
-  children: React.ReactNode,
-  slidesIndexes: {
-    current: number;
-    next: number;
-  }
-) => {
-  if (React.Children.count(children) === 2) {
-    return false;
-  } else if (
-    slidesIndexes.current > slidesIndexes.next &&
-    !(
-      slidesIndexes.current === React.Children.count(children) - 1 &&
-      slidesIndexes.next === 0
-    )
-  ) {
-    return true;
-  } else if (
-    slidesIndexes.current === 0 &&
-    slidesIndexes.next === React.Children.count(children) - 1
-  ) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
-const isNextSlideUnderlaid = (
-  children: React.ReactNode,
-  controls: boolean | "on-hover",
-  slidingType: string,
-  slidesIndexes: {
-    current: number;
-    next: number;
-  }
-) => {
-  if (controls) {
-    return (
-      (slidingType === "overlay" && isSlidingBack(children, slidesIndexes)) ||
-      (slidingType === "underlay" && !isSlidingBack(children, slidesIndexes))
-    );
-  } else if (!controls) {
-    return (
-      slidingType === "underlay" && !isSlidingBack(children, slidesIndexes)
-    );
-  } else {
-    return false;
-  }
 };
 
 const handleControledTransformation = (
@@ -192,6 +185,7 @@ const handleControledTransformation = (
   slidesIndexes: {
     current: number;
     next: number;
+    nextBtnPressed?: boolean | "dot";
   }
 ) => {
   if (index === slidesIndexes.current) {
@@ -214,4 +208,4 @@ const handleControledTransformation = (
   }
 };
 
-export { isNextSlideUnderlaid, handleControledTransformation };
+export default handleControledTransformation;
