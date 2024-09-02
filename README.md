@@ -153,7 +153,7 @@ controlsOptions will be applied only if the **controls** option is enabled. If t
 | `buttonMargin?` | string, number     | string, number (MIN: 0)                        | 30        | the margin of the standard slider buttons (px). using a string, you can achieve different values vertically and horizontally   |
 | `arrowColor?`   | string             | string                                         | "#000000" | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color) of the standard slider buttons arrows                          |
 
-> **TIP**: Both the Simple Slider and the slide wrapper have a transparent background. Add styles to the parent element and to each created "child" component, respectively (for example, to create a preloader).
+> **TIP**: If you want to enable the controls property and hide the buttons, you can set the value of the buttonShape to "invisible". This will allow users to control the slider using swipes, but not with buttons.
 
 **Controls Options Example**
 
