@@ -20,18 +20,7 @@ export const SlideContainer = styled.div<SlideProps>`
     $index === $slidesIndexes.next
       ? "1"
       : "0"};
-  transform: ${({
-    $slidesIndexes,
-    $controls,
-    $controlledByHover,
-    $handleControledTransformation,
-    $handleUncontroledTransformation,
-  }) =>
-    ($controls && $controls === "manual") ||
-    $controlledByHover ||
-    $slidesIndexes.nextBtnPressed !== undefined
-      ? $handleControledTransformation
-      : $handleUncontroledTransformation};
+  transform: ${({ $handleTransformation }) => $handleTransformation};
   transition-duration: ${({ $handleTransitionDuration }) =>
     $handleTransitionDuration};
   transition-timing-function: ${({ $handleTransitionTimingFunction }) =>

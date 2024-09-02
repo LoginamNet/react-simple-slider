@@ -1,6 +1,6 @@
 {
   "name": "@loginamnet/simple-slider",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -21,7 +21,7 @@
     "typescript",
     "responsive"
   ],
-  "description": "A simple slider on React with multiple sliding modes and the ability to add custom buttons",
+  "description": "A simple slider on React with multiple scrolling modes and the ability to add custom dots & buttons",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LoginamNet/react-simple-slider.git"

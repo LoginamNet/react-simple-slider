@@ -5,7 +5,7 @@ type ControlsOptions = {
   alinging?: "start" | "center" | "end";
   reverse?: true;
   gap?: number;
-  buttonShape?: "square" | "circle" | "transparent";
+  buttonShape?: "square" | "circle" | "transparent" | "invisible";
   buttonSize?: "small" | "medium" | "big" | number;
   buttonMargin?: string | number;
   arrowColor?: "white" | "black" | string;
@@ -74,7 +74,7 @@ type Slide = {
       alinging?: "start" | "center" | "end";
       reverse?: true;
       gap?: number;
-      buttonShape?: "square" | "circle" | "transparent";
+      buttonShape?: "square" | "circle" | "transparent" | "invisible";
       buttonSize?: "small" | "medium" | "big" | number;
       buttonMargin?: string | number;
       arrowColor?: "white" | "black" | string;
@@ -86,7 +86,7 @@ type Slide = {
     delay: number;
     timingFunction: string;
   };
-  controlledByHover: boolean;
+  swipeDirection: "left" | "right" | undefined;
   children: React.ReactNode;
   child: React.ReactNode;
   restoreIndexes: () => void;

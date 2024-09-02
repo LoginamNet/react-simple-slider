@@ -6,13 +6,10 @@ type SlideProps = {
     next: number;
     nextBtnPressed?: boolean | "dot";
   };
-  $controls: boolean | "manual";
   $notInfinite?: true;
   $type: string;
-  $controlledByHover: boolean;
   $isUnderlaid: boolean;
-  $handleControledTransformation: string | undefined;
-  $handleUncontroledTransformation: string | undefined;
+  $handleTransformation: string | undefined;
   $handleTransitionDuration: string;
   $handleTransitionTimingFunction: string;
 };
@@ -32,7 +29,7 @@ type ButtonProps = {
   $directition: "previous" | "next";
   $sliding: boolean;
   $slidingDirection: "left" | "top" | "right" | "bottom";
-  $buttonShape?: "square" | "circle" | "transparent";
+  $buttonShape?: "square" | "circle" | "transparent" | "invisible";
   $buttonSize?: "small" | "medium" | "big" | number;
   $buttonMargin?: string | number;
   $reverse?: true;

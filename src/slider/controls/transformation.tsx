@@ -2,7 +2,108 @@ import React from "react";
 
 import { isSlidingBack } from "./postition-checks";
 
-const hanldeHorizontalTranformation = (
+const setAutoStartPosition = (
+  slidingType: string,
+  slidingDirection: string
+) => {
+  switch (slidingDirection) {
+    case "right":
+      return {
+        nextSlideDirection:
+          slidingType === "underlay" ? "translateX(0%)" : "translateX(-100%)",
+        currentSlideDirection: "translateX(100%)",
+      };
+    case "top":
+      return {
+        nextSlideDirection:
+          slidingType === "underlay" ? "translateY(0%)" : "translateY(-100%)",
+        currentSlideDirection: "translateY(100%)",
+      };
+    case "bottom":
+      return {
+        nextSlideDirection:
+          slidingType === "underlay" ? "translateY(0%)" : "translateY(100%)",
+        currentSlideDirection: "translateY(-100%)",
+      };
+    default:
+      return {
+        nextSlideDirection:
+          slidingType === "underlay" ? "translateX(0%)" : "translateX(100%)",
+        currentSlideDirection: "translateX(-100%)",
+      };
+  }
+};
+
+const setManualStartPosition = (
+  slidingType: string,
+  slidingDirection: string,
+  swipeDirection: "left" | "right" | undefined
+) => {
+  switch (slidingDirection) {
+    case "right":
+      return {
+        nextSlideDirection:
+          swipeDirection === "left"
+            ? slidingType === "underlay"
+              ? "translateX(0%)"
+              : "translateX(-100%)"
+            : swipeDirection === "right"
+            ? slidingType === "overlay"
+              ? "translateX(0%)"
+              : "translateX(100%)"
+            : "translateX(-100%)",
+        currentSlideDirection:
+          swipeDirection === "right" ? "translateX(0)" : "translateX(100%)",
+      };
+    case "top":
+      return {
+        nextSlideDirection:
+          swipeDirection === "left"
+            ? slidingType === "underlay"
+              ? "translateY(0%)"
+              : "translateY(-100%)"
+            : swipeDirection === "right"
+            ? slidingType === "overlay"
+              ? "translateY(0%)"
+              : "translateY(100%)"
+            : "translateY(-100%)",
+        currentSlideDirection:
+          swipeDirection === "right" ? "translateY(0)" : "translateY(100%)",
+      };
+    case "bottom":
+      return {
+        nextSlideDirection:
+          swipeDirection === "left"
+            ? slidingType === "underlay"
+              ? "translateY(0%)"
+              : "translateY(100%)"
+            : swipeDirection === "right"
+            ? slidingType === "overlay"
+              ? "translateY(0%)"
+              : "translateY(-100%)"
+            : "translateY(100%)",
+        currentSlideDirection:
+          swipeDirection === "right" ? "translateY(0)" : "translateY(-100%)",
+      };
+    default:
+      return {
+        nextSlideDirection:
+          swipeDirection === "left"
+            ? slidingType === "underlay"
+              ? "translateX(0%)"
+              : "translateX(100%)"
+            : swipeDirection === "right"
+            ? slidingType === "overlay"
+              ? "translateX(0%)"
+              : "translateX(-100%)"
+            : "translateX(100%)",
+        currentSlideDirection:
+          swipeDirection === "right" ? "translateX(0)" : "translateX(-100%)",
+      };
+  }
+};
+
+const setHorizontalTransformation = (
   children: React.ReactNode,
   slidingDirection: string,
   slidesIndexes: {
@@ -88,7 +189,7 @@ const hanldeHorizontalTranformation = (
   }
 };
 
-const hanldeVerticalTransformation = (
+const setVerticalTransformation = (
   children: React.ReactNode,
   slidingDirection: string,
   slidesIndexes: {
@@ -162,7 +263,7 @@ const hanldeVerticalTransformation = (
   }
 };
 
-const handleTransformationDirection = (
+const setTransformationDirection = (
   children: React.ReactNode,
   slidingDirection: string,
   slidesIndexes: {
@@ -172,11 +273,11 @@ const handleTransformationDirection = (
   }
 ) => {
   return slidingDirection === "top" || slidingDirection === "bottom"
-    ? hanldeVerticalTransformation(children, slidingDirection, slidesIndexes)
-    : hanldeHorizontalTranformation(children, slidingDirection, slidesIndexes);
+    ? setVerticalTransformation(children, slidingDirection, slidesIndexes)
+    : setHorizontalTransformation(children, slidingDirection, slidesIndexes);
 };
 
-const handleControledTransformation = (
+const handleTransformation = (
   children: React.ReactNode,
   index: number,
   sliding: boolean,
@@ -186,26 +287,30 @@ const handleControledTransformation = (
     current: number;
     next: number;
     nextBtnPressed?: boolean | "dot";
-  }
+  },
+  swipeDirection: "left" | "right" | undefined
 ) => {
   if (index === slidesIndexes.current) {
     return sliding &&
       (slidingType === "sequence" ||
         (slidingType === "overlay" && isSlidingBack(children, slidesIndexes)) ||
         (slidingType === "underlay" && !isSlidingBack(children, slidesIndexes)))
-      ? handleTransformationDirection(children, slidingDirection, slidesIndexes)
+      ? setTransformationDirection(children, slidingDirection, slidesIndexes)
           .currentSlideDirection
       : "translate(0)";
-  }
-
-  if (index === slidesIndexes.next) {
+  } else if (index === slidesIndexes.next) {
     return sliding ||
       (slidingType === "overlay" && isSlidingBack(children, slidesIndexes)) ||
       (slidingType === "underlay" && !isSlidingBack(children, slidesIndexes))
       ? "translate(0)"
-      : handleTransformationDirection(children, slidingDirection, slidesIndexes)
+      : setTransformationDirection(children, slidingDirection, slidesIndexes)
           .nextSlideDirection;
+  } else {
+    return swipeDirection !== undefined
+      ? setManualStartPosition(slidingType, slidingDirection, swipeDirection)
+          .nextSlideDirection
+      : setAutoStartPosition(slidingType, slidingDirection).nextSlideDirection;
   }
 };
 
-export default handleControledTransformation;
+export default handleTransformation;

@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { ButtonProps } from "../types/simple-slider-style.types";
 
 export const Button = styled.button<ButtonProps>`
-  display: flex;
+  display: ${({ $buttonShape }) =>
+    $buttonShape === "invisible" ? "none" : "flex"};
   justify-content: center;
   align-items: center;
   aspect-ratio: 1 / 1;

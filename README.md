@@ -16,7 +16,7 @@
 </p>
 
 <p>
-  A <strong>Simple Slider</strong> on React with multiple scrolling modes and the ability to add custom buttons.
+  A <strong>Simple Slider</strong> on React with multiple scrolling modes and the ability to add custom dots & buttons.
 </p>
 
 ## Navigation
@@ -140,18 +140,20 @@ In the example above, each slide will have a size of 600x400px.
 
 controlsOptions will be applied only if the **controls** option is enabled. If they are not specified, the buttons will have a standard design and position inside the slider.
 
-| Prop            | Type               | Values                                    | Default   | Description                                                                                                                    |
-| --------------- | ------------------ | ----------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| `notInfinite?`  | undefined, boolean | true                                      | undefined | disables endless sliding and stops on the first and last slides                                                                |
-| `showOnHover?`  | undefined, boolean | true                                      | undefined | displays buttons only when hovering over the slider                                                                            |
-| `position?`     | string             | "edge", "start", "center", "end"          | "edge"    | defines the position of the buttons parallel to the axis of motion (at the edges, at the beginning, at the end, in the center) |
-| `alinging?`     | string             | "start", "center", "end"                  | "center"  | defines the position of the buttons perpendicular to the axis of motion (at the beginning, at the end, in the center)          |
-| `reverse?`      | undefined, boolean | true                                      | undefined | swaps the control buttons                                                                                                      |
-| `gap?`          | number             | number (MIN: 0)                           | 20        | the distance between the button (px)                                                                                           |
-| `buttonShape?`  | string             | "square", "circle", "transparent"         | "square"  | the shape of the standard slider buttons                                                                                       |
-| `buttonSize?`   | string, number     | "small", "medium", "big", number (MIN: 1) | "medium"  | the size of the standard slider buttons (px)                                                                                   |
-| `buttonMargin?` | string, number     | string, number (MIN: 0)                   | 30        | the margin of the standard slider buttons (px). using a string, you can achieve different values vertically and horizontally   |
-| `arrowColor?`   | string             | string                                    | "#000000" | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color) of the standard slider buttons arrows                          |
+| Prop            | Type               | Values                                         | Default   | Description                                                                                                                    |
+| --------------- | ------------------ | ---------------------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `notInfinite?`  | undefined, boolean | true                                           | undefined | disables endless sliding and stops on the first and last slides                                                                |
+| `showOnHover?`  | undefined, boolean | true                                           | undefined | displays buttons only when hovering over the slider                                                                            |
+| `position?`     | string             | "edge", "start", "center", "end"               | "edge"    | defines the position of the buttons parallel to the axis of motion (at the edges, at the beginning, at the end, in the center) |
+| `alinging?`     | string             | "start", "center", "end"                       | "center"  | defines the position of the buttons perpendicular to the axis of motion (at the beginning, at the end, in the center)          |
+| `reverse?`      | undefined, boolean | true                                           | undefined | swaps the control buttons                                                                                                      |
+| `gap?`          | number             | number (MIN: 0)                                | 20        | the distance between the button (px)                                                                                           |
+| `buttonShape?`  | string             | "square", "circle", "transparent", "invisible" | "square"  | the shape of the standard slider buttons                                                                                       |
+| `buttonSize?`   | string, number     | "small", "medium", "big", number (MIN: 1)      | "medium"  | the size of the standard slider buttons (px)                                                                                   |
+| `buttonMargin?` | string, number     | string, number (MIN: 0)                        | 30        | the margin of the standard slider buttons (px). using a string, you can achieve different values vertically and horizontally   |
+| `arrowColor?`   | string             | string                                         | "#000000" | [color](https://developer.mozilla.org/en-US/docs/Web/CSS/color) of the standard slider buttons arrows                          |
+
+> **TIP**: Both the Simple Slider and the slide wrapper have a transparent background. Add styles to the parent element and to each created "child" component, respectively (for example, to create a preloader).
 
 **Controls Options Example**
 
@@ -253,6 +255,31 @@ export default function MySliderComponent() {
 ## Archived Props<a id='archived-props'></a>
 
 Changing, deleting, and adding slider properties based on the version.
+
+---
+
+<details>
+  <summary>Version 1.1.1</summary>
+
+### Changed
+
+Slider properties have been changed, in the form of a "from/to" comparison.
+
+**Controls Options**
+
+_from (1.1.1):_
+
+| Prop           | Type   | Values                            | Default  | Description                              |
+| -------------- | ------ | --------------------------------- | -------- | ---------------------------------------- |
+| `buttonShape?` | string | "square", "circle", "transparent" | "square" | the shape of the standard slider buttons |
+
+_to (actual):_
+
+| Prop           | Type   | Values                                         | Default  | Description                              |
+| -------------- | ------ | ---------------------------------------------- | -------- | ---------------------------------------- |
+| `buttonShape?` | string | "square", "circle", "transparent", "invisible" | "square" | the shape of the standard slider buttons |
+
+</details>
 
 ---
 

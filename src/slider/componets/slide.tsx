@@ -1,8 +1,7 @@
 import React from "react";
 
 import { isNextSlideUnderlaid } from "../controls/postition-checks";
-import handleControledTransformation from "../controls/manual-sliding";
-import handleUncontroledTransformation from "../controls/auto-sliding";
+import handleTransformation from "../controls/transformation";
 import handleTransitionDuration from "../controls/transition-duration";
 import handleTransitionTimingFunction from "../controls/transition-timing-function";
 
@@ -16,7 +15,7 @@ export default function SimpleSlide(props: Slide) {
     sliding,
     slidesIndexes,
     sliderParams,
-    controlledByHover,
+    swipeDirection,
     children,
     child,
     restoreIndexes,
@@ -27,30 +26,22 @@ export default function SimpleSlide(props: Slide) {
       $index={index}
       $sliding={sliding}
       $slidesIndexes={slidesIndexes}
-      $controls={sliderParams.controls}
       $notInfinite={sliderParams.controlsOptions?.notInfinite}
       $type={sliderParams.type}
-      $controlledByHover={controlledByHover}
       $isUnderlaid={isNextSlideUnderlaid(
         children,
         sliderParams.controls,
         sliderParams.type,
         slidesIndexes
       )}
-      $handleControledTransformation={handleControledTransformation(
+      $handleTransformation={handleTransformation(
         children,
         index,
         sliding,
         sliderParams.type,
         sliderParams.direction,
-        slidesIndexes
-      )}
-      $handleUncontroledTransformation={handleUncontroledTransformation(
-        index,
-        sliding,
-        sliderParams.type,
-        sliderParams.direction,
-        slidesIndexes
+        slidesIndexes,
+        swipeDirection
       )}
       $handleTransitionDuration={handleTransitionDuration(
         index,

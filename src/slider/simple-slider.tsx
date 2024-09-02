@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
+import useSliderSwipe from "./hooks/swipe";
 
 import SimpleSlide from "./componets/slide";
 import Buttons from "./componets/buttons";
@@ -44,6 +45,7 @@ export default function SimpleSlider(props: Slider) {
 
   const [sliding, setSliding] = useState(false);
   const [hovered, setHovered] = useState(false);
+
   const [controlledByHover, setControlledByHover] = useState(false);
   const [slidesIndexes, setSlidesIndexes] = useState<{
     current: number;
@@ -60,6 +62,13 @@ export default function SimpleSlider(props: Slider) {
         }
       : { current: 0, next: 0, nextBtnPressed: undefined }
   );
+  const {
+    swipeDirection,
+    handleSwipeStart,
+    handleSwipeMove,
+    handleSwipe,
+    handleSwipeEnd,
+  } = useSliderSwipe(sliderParams.direction, 50);
 
   const updateSliderParams = useCallback(() => {
     setSliderParams({
@@ -150,7 +159,11 @@ export default function SimpleSlider(props: Slider) {
 
   useEffect(() => {
     if (
-      !(sliderParams.controls === "manual" || controlledByHover) &&
+      !(
+        sliderParams.controls === "manual" ||
+        controlledByHover ||
+        swipeDirection
+      ) &&
       slidesIndexes.current === slidesIndexes.next
     ) {
       const timeoutId = setTimeout(() => {
@@ -173,6 +186,7 @@ export default function SimpleSlider(props: Slider) {
     hovered,
     controlledByHover,
     children,
+    swipeDirection,
   ]);
 
   // checking for differences in the indexes of the current and next slides to enable the sliding process
@@ -209,6 +223,22 @@ export default function SimpleSlider(props: Slider) {
 
         setSliderHoverStatus();
       }}
+      onTouchStart={(event) => {
+        event.stopPropagation();
+
+        handleSwipeStart(event, sliding, sliderParams.controls);
+      }}
+      onTouchMove={(event) => {
+        event.stopPropagation();
+
+        handleSwipeMove(event, sliding, 5);
+        handleSwipe(event, sliding, 30, 250, prevSlide, nextSlide);
+      }}
+      onTouchEnd={(event) => {
+        event.stopPropagation();
+
+        handleSwipeEnd();
+      }}
     >
       <SliderBody>
         {React.Children.map(children, (child, index) => (
@@ -217,7 +247,7 @@ export default function SimpleSlider(props: Slider) {
             sliding={sliding}
             slidesIndexes={slidesIndexes}
             sliderParams={sliderParams}
-            controlledByHover={controlledByHover}
+            swipeDirection={swipeDirection}
             child={child}
             restoreIndexes={restoreIndexes}
           >
